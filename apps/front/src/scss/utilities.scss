@@ -1,0 +1,38 @@
+// Utility classes
+.text {
+  &-h1 { font-size: 2.5rem; }
+  &-h2 { font-size: 2rem; }
+  &-h3 { font-size: 1.75rem; }
+  &-h4 { font-size: 1.5rem; }
+  &-h5 { font-size: 1.25rem; }
+  &-h6 { font-size: 1rem; }
+  
+  &-primary { color: $primary; }
+  &-secondary { color: $secondary; }
+  &-accent { color: $accent; }
+  &-positive { color: $positive; }
+  &-negative { color: $negative; }
+  &-info { color: $info; }
+  &-warning { color: $warning; }
+}
+
+.bg {
+  &-primary { background-color: $primary; }
+  &-secondary { background-color: $secondary; }
+  &-accent { background-color: $accent; }
+}
+
+// Spacing utilities
+@for $i from 0 through 8 {
+  .m-#{$i} { margin: #{$i * $space-base}; }
+  .mt-#{$i} { margin-top: #{$i * $space-base}; }
+  .mb-#{$i} { margin-bottom: #{$i * $space-base}; }
+  .ml-#{$i} { margin-left: #{$i * $space-base}; }
+  .mr-#{$i} { margin-right: #{$i * $space-base}; }
+  
+  .p-#{$i} { padding: #{$i * $space-base}; }
+  .pt-#{$i} { padding-top: #{$i * $space-base}; }
+  .pb-#{$i} { padding-bottom: #{$i * $space-base}; }
+  .pl-#{$i} { padding-left: #{$i * $space-base}; }
+  .pr-#{$i} { padding-right: #{$i * $space-base}; }
+}

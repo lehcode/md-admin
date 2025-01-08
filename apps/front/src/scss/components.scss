@@ -1,0 +1,30 @@
+// Custom component styles
+
+.card {
+  &-hoverable {
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.article {
+  &-card {
+    padding: calc($space-base / 2);
+    margin-bottom: calc($space-base / 2);
+    
+    .article-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: calc($space-base / 2) / 2;
+    }
+    
+    .article-meta {
+      font-size: 0.875rem;
+      color: rgba($dark, 0.7);
+    }
+  }
+}

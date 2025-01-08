@@ -1,23 +1,63 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import MainLayout from '../layouts/MainLayout.vue'
 
+const routes = [
+  {
+    path: '/',
+    component: MainLayout,
+    // Learn about nested routes - all these will use MainLayout
+    children: [
+      {
+        // Learn about default child route
+        path: '',
+        redirect: '/articles' // Default route redirects to articles
+      },
+      {
+        // Learn about route configuration with lazy loading
+        path: 'articles',
+        name: 'articles',
+        component: () => import('../pages/ArticlesPage.vue') // Lazy loaded
+      },
+      {
+        path: 'sources',
+        name: 'sources',
+        component: () => import('../pages/SourcesPage.vue')
+      },
+      // {
+      //   path: 'prompts',
+      //   name: 'prompts',
+      //   component: () => import('../pages/PromptsPage.vue')
+      // },
+      // {
+      //   // Learn about dynamic route parameters
+      //   path: 'articles/:id/edit',
+      //   name: 'article-edit',
+      //   component: () => import('../pages/ArticleEditPage.vue'),
+      //   // Learn about route props
+      //   props: true
+      // }
+    ]
+  },
+  {
+    // Learn about catch-all/404 route
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('../pages/NotFoundPage.vue')
+  }
+]
+
+// Create and configure router instance
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-    },
-  ],
-});
+  // Learn about history mode
+  history: createWebHistory(),
+  routes
+})
 
-export default router;
+// Learn about navigation guards
+router.beforeEach((to, from, next) => {
+  // Example of global navigation guard
+  // You can add authentication logic here later
+  next()
+})
+
+export default router
