@@ -1,0 +1,101 @@
+# NX specific
+.nx/
+tmp/
+dist/
+
+# Dependencies
+node_modules/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Build outputs
+dist/
+build/
+out/
+.output/
+
+# Quasar/Vue specific
+.quasar/
+.DS_Store
+.thumbs.db
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+/cypress/videos/
+/cypress/screenshots/
+
+# Local files
+*.local
+.local
+
+# Debug logs
+debug.log
+error.log
+*.log
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Content management
+content/drafts/
+__generated__/
+
+# RSS cache
+.rss-cache/
+
+# Ollama specific
+.ollama/
+.ollama-cache/
+
+# SSL certificates
+*.pem
+*.crt
+*.key
+
+# Artifact files
+*.tsbuildinfo
+.eslintcache
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Optional: Uncomment if using Firebase
+# .firebase/
+# firebase-debug.log
+# ui-debug.log
+
+# Optional: Uncomment if using Vercel
+# .vercel
+
+# Optional: Uncomment if using Netlify
+# .netlify
