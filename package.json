@@ -1,4 +1,28 @@
 {
+  "name": "quasar-vite",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "nx run front:serve:development --watch --port 4200 --host 0.0.0.0",
+    "serve:host": "nx serve front --host",
+    "build": "nx build front",
+    "preview": "nx preview front",
+    "test": "nx test front",
+    "test:watch": "nx test front --watch",
+    "test:ui": "nx test front --ui",
+    "lint": "nx lint front",
+    "lint:fix": "nx lint front --fix",
+    "e2e": "nx e2e front-e2e",
+    "e2e:watch": "nx e2e front-e2e --watch",
+    "clean": "rm -rf node_modules/.vite dist tmp",
+    "typecheck": "nx typecheck front"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.15",
+    "quasar": "^2.17.6",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@nx/devkit": "20.3.1",
@@ -10,10 +34,11 @@
     "@nx/vue": "^20.3.1",
     "@nx/web": "20.3.1",
     "@playwright/test": "^1.36.0",
+    "@quasar/vite-plugin": "^1.8.1",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/coverage-v8": "^1.0.4",
     "@vitest/ui": "^1.3.1",
     "@vue/eslint-config-prettier": "7.1.0",
@@ -26,14 +51,10 @@
     "jsdom": "~22.1.0",
     "prettier": "^2.6.2",
     "tslib": "^2.3.0",
-    "typescript": "~5.6.2",
+    "typescript": "^5.7.2",
     "typescript-eslint": "^8.13.0",
-    "vite": "^5.0.0",
+    "vite": "^6.0.7",
     "vitest": "^1.3.1",
     "vue-tsc": "^2.0.0"
-  },
-  "dependencies": {
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
   }
 }
