@@ -1,0 +1,69 @@
+@startuml Content_Generation_System
+
+' Styling
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+' Colors as direct values
+skinparam package {
+    BackgroundColor<<Frontend>> #E8F5E9
+    BackgroundColor<<Content>> #E3F2FD
+    BackgroundColor<<AI>> #FCE4EC
+    BackgroundColor<<Storage>> #FFF3E0
+    BackgroundColor<<Deploy>> #F3E5F5
+}
+
+package "Frontend Application" <<Frontend>> {
+    [UI Components\nVue 3 + Quasar] as ui
+    [Router\nVue Router] as router
+    [State\nComposition API] as state
+    
+    ui --> router
+    ui --> state
+}
+
+package "Content Management" <<Content>> {
+    [RSS Fetcher\nRSS.app API] as rssfetcher
+    [Article Manager] as articlemanager
+    [Metadata Editor] as metaeditor
+}
+
+package "AI Processing" <<AI>> {
+    [Prompt Templates] as prompts
+    [Local Ollama] as ollama
+    [SEO Generator] as seo
+    
+    prompts --> ollama
+    ollama --> seo
+}
+
+package "Storage" <<Storage>> {
+    database "Markdown Files" as markdown
+    database "Local Cache" as cache
+}
+
+package "Deployment" <<Deploy>> {
+    [GitHub Actions] as actions
+    [GitHub Pages] as pages
+}
+
+' Relationships
+router --> articlemanager : routes to
+rssfetcher --> articlemanager : provides data
+articlemanager --> metaeditor : updates
+metaeditor --> ollama : requests processing
+articlemanager --> markdown : saves content
+rssfetcher --> cache : caches data
+actions --> pages : deploys to
+
+note right of ollama
+  Local AI processing
+  using OpenAI-compatible API
+end note
+
+note right of markdown
+  Static content storage
+  with frontmatter metadata
+end note
+
+@enduml
