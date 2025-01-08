@@ -71,11 +71,11 @@
         <!-- RSS Feeds Navigation Item 
             - clickable makes it interactive
             - v-ripple adds material design ripple effect
-            - to="/feeds" integrates with Vue Router -->
+            - to="/sources" integrates with Vue Router -->
         <q-item
           v-ripple
           clickable
-          to="/feeds"
+          to="/sources"
         >
           <q-item-section avatar>
             <q-icon name="rss_feed" />

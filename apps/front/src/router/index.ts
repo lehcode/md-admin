@@ -23,6 +23,11 @@ const routes = [
         name: 'sources',
         component: () => import('../pages/SourcesPage.vue')
       },
+      {
+        path: 'examples',
+        name: 'examples',
+        component: () => import('../pages/examples/index.vue')
+      },
       // {
       //   path: 'prompts',
       //   name: 'prompts',
