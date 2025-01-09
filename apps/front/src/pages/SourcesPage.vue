@@ -22,13 +22,16 @@
           <!-- Learn about Quasar's list components -->
           <q-list separator>
             <q-item
-              v-for="source in sources"
+              v-for="source in feeds"
               :key="source.id"
             >
               <q-item-section>
                 <q-item-label>{{ source.name }}</q-item-label>
                 <q-item-label caption>
                   {{ source.url }}
+                </q-item-label>
+                <q-item-label v-if="source.description" caption>
+                  {{ source.description }}
                 </q-item-label>
               </q-item-section>
 
@@ -100,7 +103,7 @@
               <q-item-section>
                 <q-item-label>Total Sources</q-item-label>
                 <q-item-label caption>
-                  {{ sources.length }} sources
+                  {{ feeds.length }} sources
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -108,7 +111,7 @@
               <q-item-section>
                 <q-item-label>Active Sources</q-item-label>
                 <q-item-label caption>
-                  {{ sources.filter(s => s.active).length }} sources
+                  {{ feeds.filter(s => s.active).length }} sources
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -168,55 +171,74 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { useRss } from '../services/rss';
+import type { RssFeed } from '../services/rss';
+import { useQuasar } from 'quasar';
 
-interface Source {
-  id: number
-  name: string
-  url: string
-  active: boolean
-}
+const $q = useQuasar();
+const { feeds, addFeed, updateFeed, removeFeed } = useRss();
 
-// Learn about reactive state
-const sources = ref<Source[]>([
-  {
-    id: 1,
-    name: 'Tech News',
-    url: 'https://example.com/feed',
-    active: true
-  },
-  {
-    id: 2,
-    name: 'AI Updates',
-    url: 'https://ai-news.com/feed',
-    active: false
-  }
-])
-
-const showAddDialog = ref(false)
+const showAddDialog = ref(false);
 const newSource = ref({
   name: '',
-  url: ''
-})
+  url: '',
+  description: ''
+});
 
-// Learn about event handlers
 const onSubmit = () => {
-  // Implementation will come later
-  console.log('Submit:', newSource.value)
-  showAddDialog.value = false
-}
+  const feed = addFeed({
+    name: newSource.value.name,
+    url: newSource.value.url,
+    description: newSource.value.description,
+    active: true
+  });
 
-const editSource = (source: Source) => {
-  console.log('Edit source:', source)
-}
+  if (feed) {
+    $q.notify({
+      type: 'positive',
+      message: 'RSS feed added successfully'
+    });
+    showAddDialog.value = false;
+    // Reset form
+    newSource.value = {
+      name: '',
+      url: '',
+      description: ''
+    };
+  }
+};
 
-const toggleSource = (source: Source) => {
-  source.active = !source.active
-}
+const editSource = (source: RssFeed) => {
+  // We'll implement this later
+  console.log('Edit source:', source);
+};
 
-const confirmDelete = (source: Source) => {
-  console.log('Delete source:', source)
-}
+const toggleSource = (source: RssFeed) => {
+  const updated = updateFeed(source.id, { active: !source.active });
+  if (updated) {
+    $q.notify({
+      type: 'positive',
+      message: `RSS feed ${updated.active ? 'activated' : 'deactivated'}`
+    });
+  }
+};
+
+const confirmDelete = (source: RssFeed) => {
+  $q.dialog({
+    title: 'Confirm Deletion',
+    message: `Are you sure you want to delete "${source.name}"?`,
+    cancel: true,
+    persistent: true
+  }).onOk(() => {
+    if (removeFeed(source.id)) {
+      $q.notify({
+        type: 'positive',
+        message: 'RSS feed deleted successfully'
+      });
+    }
+  });
+};
 </script>
 
 <style scoped>
