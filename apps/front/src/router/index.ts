@@ -28,6 +28,11 @@ const routes = [
         name: 'examples',
         component: () => import('../pages/examples/index.vue')
       },
+      {
+        path: 'config',
+        name: 'config',
+        component: () => import('../pages/ConfigPage.vue')
+      },
       // {
       //   path: 'prompts',
       //   name: 'prompts',

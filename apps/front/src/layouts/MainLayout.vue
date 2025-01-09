@@ -36,8 +36,9 @@
             round
             dense
             icon="settings"
+            to="/config"
           >
-            <q-tooltip>AI Settings</q-tooltip>
+            <q-tooltip>Configuration</q-tooltip>
           </q-btn>
           
           <!-- Output Directory Button with Tooltip -->
@@ -110,6 +111,23 @@
             <q-icon name="psychology" />
           </q-item-section>
           <q-item-section>Prompt Templates</q-item-section>
+        </q-item>
+
+        <!-- Settings Section -->
+        <q-item-label header>
+          Settings
+        </q-item-label>
+
+        <!-- Configuration Navigation -->
+        <q-item
+          v-ripple
+          clickable
+          to="/config"
+        >
+          <q-item-section avatar>
+            <q-icon name="settings" />
+          </q-item-section>
+          <q-item-section>Configuration</q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
