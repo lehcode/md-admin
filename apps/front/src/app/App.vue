@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import { useConfig } from '../services/config';
+
+const { config } = useConfig();
 </script>
 
 <template>
